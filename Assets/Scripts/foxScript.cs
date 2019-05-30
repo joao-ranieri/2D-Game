@@ -8,15 +8,16 @@ public class foxScript : MonoBehaviour{
     private Rigidbody2D playerRb;
     public Transform groundCheck; //objeto responsavel por detectar se o personagem esta sobre uma superficie
     public Collider2D standing, crouching; //colisor em pe e agachado
+    public GameObject fxDeath;
 
     public bool Grounded; //indidca se o personagem esta pisando no chao
     public bool lookLeft; //indica se o personagem esta virada para esquerda
 
-    public int idAnimation; //indica o id da animacao
+    private int idAnimation; //indica o id da animacao
 
     private float horizontal, vertical;
-    public float speed; //velocidade de movimento do personagem
-    public float jumpForce; //forca aplicada para gerar o pulo do personagem
+    private float speed; //velocidade de movimento do personagem
+    private float jumpForce; //forca aplicada para gerar o pulo do personagem
     
     // Start is called before the first frame update
     void Start(){
@@ -31,7 +32,7 @@ public class foxScript : MonoBehaviour{
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update() { 
 
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
@@ -96,6 +97,21 @@ public class foxScript : MonoBehaviour{
         float x = transform.localScale.x;
         x *= -1; //invert o valor do scale x
         transform.localScale = new Vector3(x, transform.localScale.y, transform.localScale.z);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.name == "Opossum" && collision.GetType().Name == "CapsuleCollider2D") {
+            //StartCoroutine("deathAnimation"); 
+        }
+    }
+
+    IEnumerator deathAnimation(){
+        playerAnimator.SetTrigger("hit");
+        yield return new WaitForSeconds(1);
+        GameObject fxDie = Instantiate(fxDeath, playerRb.position, transform.localRotation);
+        Destroy(this.gameObject);
+        yield return new WaitForSeconds(1);
+        Destroy(fxDie);
     }
 }
 

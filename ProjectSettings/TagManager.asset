@@ -14,12 +14,12 @@ TagManager:
   - 
   - 
   - Background
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - BgObjects
+  - CamLimits
+  - GroundCheck
+  - EnemyObstacles
+  - Enemies
+  - Player
   - 
   - 
   - 
@@ -41,8 +41,14 @@ TagManager:
   - name: Background
     uniqueID: 437746335
     locked: 0
+  - name: BgObjects
+    uniqueID: 771202677
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Objetos Frente
+    uniqueID: 1518041299
     locked: 0
   - name: Plataformas Colisao
     uniqueID: 1375766551
