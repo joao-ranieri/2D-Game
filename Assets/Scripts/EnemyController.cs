@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour{
     IEnumerator deathAnimation(){
         Destroy(this.gameObject);
         GameObject fxDie = Instantiate(fxDeath, enemyRB.position, transform.localRotation);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.7f);
         Destroy(fxDie);
     }
 

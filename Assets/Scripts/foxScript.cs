@@ -12,6 +12,7 @@ public class foxScript : MonoBehaviour{
 
     public bool Grounded; //indidca se o personagem esta pisando no chao
     public bool lookLeft; //indica se o personagem esta virada para esquerda
+    public bool canMove;
 
     private int idAnimation; //indica o id da animacao
 
@@ -23,6 +24,7 @@ public class foxScript : MonoBehaviour{
     void Start(){
         playerRb = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        canMove = true;
     }
 
     //possui taxa de atualizacao fixa de 0.02
@@ -34,9 +36,11 @@ public class foxScript : MonoBehaviour{
     // Update is called once per frame
     void Update() { 
 
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-        speed = 0.8f;
+        if (canMove) {
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
+            speed = 0.8f;
+        }
 
         //comeco da verificacao da direcao do personagem
         if (horizontal > 0 && lookLeft == true) {
@@ -63,7 +67,7 @@ public class foxScript : MonoBehaviour{
         //fim da verificacao da direcao e movimentacao
 
         //comeco do comando de pulo
-        if ( Input.GetButtonDown("Jump") && Grounded == true){
+        if ( Input.GetButtonDown("Jump") && Grounded == true && canMove == true){
 
             if (vertical < 0){
                 jumpForce = 200;
@@ -101,13 +105,26 @@ public class foxScript : MonoBehaviour{
 
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.name == "Opossum" && collision.GetType().Name == "CapsuleCollider2D") {
-            //StartCoroutine("deathAnimation"); 
+            collision.gameObject.SendMessage("changeCanFallow");
+            StartCoroutine("deathAnimation"); 
+        }
+        if (collision.gameObject.name == "spikes" && collision.GetType().Name == "EdgeCollider2D"){
+            StartCoroutine("deathAnimation");
         }
     }
 
     IEnumerator deathAnimation(){
+        canMove = false;
+
+        if (lookLeft){
+            playerRb.AddForce(new Vector2(500, 0));
+        } else {
+            playerRb.AddForce(new Vector2(-500, 0));
+        }
+
+        this.gameObject.layer = 13; // layer 13 representa a layer de inimigos, ela nao colide com outros inimigos
         playerAnimator.SetTrigger("hit");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         GameObject fxDie = Instantiate(fxDeath, playerRb.position, transform.localRotation);
         Destroy(this.gameObject);
         yield return new WaitForSeconds(1);

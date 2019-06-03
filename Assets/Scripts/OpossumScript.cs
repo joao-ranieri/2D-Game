@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpossumScript : EnemyController { 
+public class OpossumScript : EnemyController {
+
+    private bool canFallow;
 
     // Start is called before the first frame update
     void Start() {
+        canFallow = true;
         speed = 0.4f;
         distanceAtack = 0.5f;
         distanceChangeRoute = 0.25f;
@@ -21,7 +24,7 @@ public class OpossumScript : EnemyController {
         float distance = playerDistance();
         isMoving = (distance <= distanceAtack);
 
-        if (isMoving){
+        if (isMoving && canFallow){
             if ( (player.position.x > transform.position.x && spriteRenderer.flipX) || 
                     (player.position.x < transform.position.x && !spriteRenderer.flipX) ) {
                 flip();
@@ -42,5 +45,9 @@ public class OpossumScript : EnemyController {
         if (collision.gameObject.name == "Fox" && collision.GetType().Name == "CircleCollider2D"){
             StartCoroutine("deathAnimation");
         }
+    }
+
+    void changeCanFallow(){
+        this.canFallow = false;
     }
 }
