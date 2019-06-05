@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\foxScript.cs" />
     <Compile Include="Assets\Scripts\MenuScript.cs" />
     <Compile Include="Assets\Scripts\OpossumScript.cs" />
+    <Compile Include="Assets\Sunnyland\artwork\Sprites\Menu\menuScript.cs" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Workspace/Unity/2D-Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
