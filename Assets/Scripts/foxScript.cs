@@ -1,8 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class foxScript : MonoBehaviour{
+
+    public PauseScript pauseScript;
 
     private Animator playerAnimator;
     private Rigidbody2D playerRb;
@@ -34,7 +36,7 @@ public class foxScript : MonoBehaviour{
     }
 
     // Update is called once per frame
-    void Update() { 
+    void Update() {
 
         if (canMove) {
             horizontal = Input.GetAxisRaw("Horizontal");
@@ -106,7 +108,7 @@ public class foxScript : MonoBehaviour{
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.name == "Opossum" && collision.GetType().Name == "CapsuleCollider2D") {
             collision.gameObject.SendMessage("changeCanFallow");
-            StartCoroutine("deathAnimation"); 
+            StartCoroutine("deathAnimation");
         }
         if (collision.gameObject.name == "spikes" && collision.GetType().Name == "EdgeCollider2D"){
             StartCoroutine("deathAnimation");
@@ -115,6 +117,7 @@ public class foxScript : MonoBehaviour{
 
     IEnumerator deathAnimation(){
         canMove = false;
+        speed = 0;
 
         if (lookLeft){
             playerRb.AddForce(new Vector2(500, 0));
@@ -126,9 +129,10 @@ public class foxScript : MonoBehaviour{
         playerAnimator.SetTrigger("hit");
         yield return new WaitForSeconds(0.5f);
         GameObject fxDie = Instantiate(fxDeath, playerRb.position, transform.localRotation);
-        Destroy(this.gameObject);
-        yield return new WaitForSeconds(1);
-        Destroy(fxDie);
+        //Destroy(this.gameObject);
+        this.gameObject.GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        pauseScript.callGameOver();
     }
 }
 
