@@ -10,7 +10,6 @@ public class PauseScript : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-
         gameOver.SetActive(false);
         pauseScreen.SetActive(false);
         isPaused = false;
@@ -42,7 +41,6 @@ public class PauseScript : MonoBehaviour {
         gameOver.SetActive(true);
         continuar.SetActive(false);
         Time.timeScale = 0;
-        Debug.Log("GAME OVER");
     }
 
     public void continues(){
