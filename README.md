@@ -6,7 +6,7 @@ O software refere-se a um jogo de aventura e quebra-cabeças, onde o "Criador", 
 
 Este projeto não foi desenvolvido com o intuito comercial, todo seu código está disponível para download, para consultas ou para aqueles interessados em melhorar o que foi realizado.
 
-A documentação encontra-se disponível nos arquivos do projeto.
+O [relatório técnico](https://github.com/joao-ranieri/2D-Game/blob/master/Relat%C3%B3rio%20T%C3%A9cnico%20-%20Strange%20Adventure.pdf) do projeto encontra-se disponível nos arquivos do projeto.
 
 Um executável esta disponível no arquivo .rar que se encontra na raiz do projeto, com o nome [Strange Adventure](https://github.com/joao-ranieri/2D-Game/blob/master/Strange%20Adventure.rar). 
 * Para executa-lo, basta extrair e executar o arquivo 2DProject.
