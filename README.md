@@ -2,7 +2,7 @@
 
 **Projeto desenvolvido por João Paulo Souza Ranieri, para a conclusão do curso de Sistemas de Informação no Centro Universitário UNA de Uberlândia.**
 
-O software refere-se a um jogo de aventura e quebra-cabeças, onde o "Criador", uma entidade do jogo, convida o jogador a se aventurar e testar o jogo desenvolvido. 
+O software refere-se a um jogo de aventura e quebra-cabeças, onde o "Criador", uma entidade do jogo, convida o jogador a se aventurar e testar o jogo desenvolvido. Em seu caminho existirão obstáculos como, inimigos, burracos, e objetos que podem machucar, como por exemplo, espinhos. Preste atenção nas dicas do "Criador", elas são essenciais para encontrar e abrir caminho entre as fases.
 
 Este projeto não foi desenvolvido com o intuito comercial, todo seu código está disponível para download, para consultas ou para aqueles interessados em melhorar o que foi realizado. 
 
